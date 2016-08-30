@@ -1,0 +1,22 @@
+{
+  "name": "kool-shell",
+  "version": "0.0.8",
+  "description": "A minimal module to deal with shell commands",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pqml/kool-shell.git"
+  },
+  "author": "Hugo Piquemal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pqml/kool-shell/issues"
+  },
+  "homepage": "https://github.com/pqml/kool-shell#readme",
+  "dependencies": {
+    "term-color": "^1.0.1"
+  }
+}
