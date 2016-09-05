@@ -28,8 +28,9 @@ const KoolShell = {
     });
   },
 
-  error(msg) {
+  error(msg, exit = false) {
     console.log(colors.red(msg));
+    if (exit) this.exit(1);
     return this;
   },
 
@@ -38,8 +39,9 @@ const KoolShell = {
     return this;
   },
 
-  success(msg) {
+  success(msg, exit = false) {
     console.log(colors.green(msg));
+    if (exit) this.exit(1);
     return this;
   },
 
