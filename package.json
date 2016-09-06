@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/pqml/kool-shell#readme",
   "dependencies": {
-    "term-color": "^1.0.1"
+    "supports-color": "^3.1.2"
   }
 }
