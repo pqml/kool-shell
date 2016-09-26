@@ -15,6 +15,11 @@ function testFullError () {
   }
 }
 
+function testSpreading () {
+  console.log('\nTest spread messages')
+  sh.error('message1', 'message2', 'message3')
+}
+
 function testSilentExec () {
   console.log('\nTest silentExec()')
   return new Promise((resolve, reject) => {
@@ -44,6 +49,7 @@ function testExit () {
 
 testQuestion()
   .then(() => testFullError())
+  .then(() => testSpreading())
   .then(() => testSilentExec())
   .then(() => testExec())
   .then(() => testExit())

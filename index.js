@@ -42,30 +42,30 @@ const KoolShell = {
     })
   },
 
-  error (msg) {
+  error (...msg) {
     process.stdout.write(colors.open.red)
-    console.log(msg)
+    console.log(...msg)
     process.stdout.write(colors.close.red)
     return this
   },
 
-  warning (msg) {
+  warning (...msg) {
     process.stdout.write(colors.open.yellow)
-    console.log(msg)
+    console.log(...msg)
     process.stdout.write(colors.close.yellow)
     return this
   },
 
-  success (msg) {
+  success (...msg) {
     process.stdout.write(colors.open.green)
-    console.log(msg)
+    console.log(...msg)
     process.stdout.write(colors.close.green)
     return this
   },
 
-  info (msg) {
+  info (...msg) {
     process.stdout.write(colors.open.gray)
-    console.log(msg)
+    console.log(...msg)
     process.stdout.write(colors.close.gray)
     return this
   },
