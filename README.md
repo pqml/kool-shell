@@ -12,9 +12,7 @@
   </a>
 </div>
 
-===
-
-<br/> 
+<br><br>
 
 ### Features
 
@@ -26,25 +24,114 @@
 - Displays colorful errors (message & stack trace)
 - Ask questions
 
+<br>
+
 ### Installation
 
 ```sh
 npm install pqml/kool-shell -S
 ```
 
-### Usage
 
+<br>
+
+### Example
 ```javascript
+const path = require('path')
 const sh = require('kool-shell')
 
-// display an error and exit with a failure code
-sh.error('Something bad happens').exit(1)
+// Execute npm init in the directory ./myproject
+// Once npm init is done, display a success message and exit node
+sh.exec('npm', ['init'], { cwd: path.join(__dirname, 'myproject') })
+  .then(() => { sh.success('npm init done !').exit(0) })
+
 ```
 
-### Methods
+<br>
 
-TODO
+### Usage
 
+#### `sh.exec (command, [...arguments], {...options})`
+
+Exec a _command_ through a shell instance. The parent `stdio` is inherited, meaning that all logs, error and user inputs will be displayed in the controlling terminal.
+
+* _command_: the command to execute with `child_process.spawn()` (ex: `npm`)
+* _arguments_: arguments of the function, in an array (ex: `['i', '-S', 'xtend']`)
+* _options_: `child_process.spawn()` options (ex: `{cwd: './coolproject/'}`)
+
+<sup>→  Return a promise that will be resolved or rejected depending on the output of the command.</sup>
+
+<br>
+
+#### `sh.silentExec (command, [...arguments], {...options})`
+
+Basically the same as `sh.exec` without the parent `stdio` inheritance.
+<br>
+Instead, ouput are passed in the catch / resolve method of the returned promise
+<br>
+<sup>→  Return a promise that will be resolved or rejected depending on the output of the command.</sup>
+
+<br>
+
+#### `sh.question (question, testAnswer)`
+
+Ask question to the user
+<br>
+* _question_: question as a string
+* _testAnswer_: function called after user has answered. You can test the user answer pass as 1st parameter, and return true or false to resolve or reject the promise
+
+Example:
+```js
+  sh.question('Do you want some cheese ? (yes) ', checkYes)
+    .catch(() => { sh.error ('No cheese for you')})
+    .then(() => { sh.success (':mouse:')})
+
+  function checkYes (answer) {
+    return answer.match(/^y(es)?$/i)
+  }
+```
+
+<sup>→  Return a promise that will be resolved or rejected depending on the return value of the testAnswer function.</sup>
+
+<br>
+
+#### `sh.error (...msg)`
+
+Console.log messages / errors in red
+<br>
+<sup>→  Return the kool-shell object, you can chain another method.</sup>
+
+<br>
+
+#### `sh.warning (...msg)`
+
+Console.log messages / errors in yellow
+<br>
+<sup>→  Return the kool-shell object, you can chain another method.</sup>
+
+<br>
+
+#### `sh.success (...msg)`
+
+Console.log messages / errors in green
+<br>
+<sup>→  Return the kool-shell object, you can chain another method.</sup>
+
+<br>
+
+#### `sh.info (...msg)`
+
+Console.log messages / errors in gray
+<br>
+<sup>→  Return the kool-shell object, you can chain another method.</sup>
+
+<br>
+
+#### `sh.exit (code = 0)`
+
+Exit the node process with code _code_ (default: 0)
+
+<br>
 
 ### License
 MIT.
