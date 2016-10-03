@@ -59,7 +59,7 @@ Exec a _command_ through a shell instance. The parent `stdio` is inherited, mean
 * _arguments_: arguments of the function, in an array (ex: `['i', '-S', 'xtend']`)
 * _options_: `child_process.spawn()` options (ex: `{cwd: './coolproject/'}`)
 
-<sup>→  Return a promise that will be resolved or rejected depending on the output of the command.</sup>
+_→  Return a promise that will be resolved or rejected depending on the output of the command._
 
 <br>
 
@@ -68,8 +68,8 @@ Exec a _command_ through a shell instance. The parent `stdio` is inherited, mean
 Basically the same as `sh.exec` without the parent `stdio` inheritance.
 <br>
 Instead, ouput are passed in the catch / resolve method of the returned promise
-<br>
-<sup>→  Return a promise that will be resolved or rejected depending on the output of the command.</sup>
+<br><br>
+_→  Return a promise that will be resolved or rejected depending on the output of the command._
 
 <br>
 
@@ -84,14 +84,14 @@ Example:
 ```js
   sh.question('Do you want some cheese ? (yes) ', checkYes)
     .catch(() => { sh.error ('No cheese for you')})
-    .then(() => { sh.success ('Some cheese : 🧀 🧀 🧀')})
+    .then(() => { sh.success ('Some cheese : 🧀🧀🧀')})
 
   function checkYes (answer) {
     return answer.match(/^y(es)?$/i)
   }
 ```
 
-<sup>→  Return a promise that will be resolved or rejected depending on the return value of the testAnswer function.</sup>
+_→  Return a promise that will be resolved or rejected depending on the return value of the testAnswer function._
 
 <br>
 
@@ -99,7 +99,7 @@ Example:
 
 Console.log messages / errors in red
 <br>
-<sup>→  Return the kool-shell object, you can chain another method.</sup>
+_→  Return the kool-shell object, you can chain another method._
 
 <br>
 
@@ -107,7 +107,7 @@ Console.log messages / errors in red
 
 Console.log messages / errors in yellow
 <br>
-<sup>→  Return the kool-shell object, you can chain another method.</sup>
+_→  Return the kool-shell object, you can chain another method._
 
 <br>
 
@@ -115,7 +115,7 @@ Console.log messages / errors in yellow
 
 Console.log messages / errors in green
 <br>
-<sup>→  Return the kool-shell object, you can chain another method.</sup>
+_→  Return the kool-shell object, you can chain another method._
 
 <br>
 
@@ -123,7 +123,7 @@ Console.log messages / errors in green
 
 Console.log messages / errors in gray
 <br>
-<sup>→  Return the kool-shell object, you can chain another method.</sup>
+_→  Return the kool-shell object, you can chain another method._
 
 <br>
 
