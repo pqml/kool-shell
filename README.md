@@ -29,7 +29,7 @@
 ## Installation
 
 ```sh
-npm install pqml/kool-shell -S
+npm install -S kool-shell
 ```
 
 
@@ -51,40 +51,55 @@ sh.exec('npm', ['init'], { cwd: path.join(__dirname, 'myproject') })
 
 ## Usage
 
-#### `sh.exec (command, [...arguments], {...options})`
+#### `sh.exec(command, [...arguments], {...options})`
 
-Exec a _command_ through a shell instance. The parent `stdio` is inherited, meaning that all logs, error and user inputs will be displayed in the controlling terminal.
+Exec a _command_ through a shell instance. The parent `stdio` is inherited, meaning that all logs, errors and user inputs will be displayed in the controlling terminal.
 
 * _command_: the command to execute with `child_process.spawn()` (ex: `npm`)
 * _arguments_: arguments of the function, in an array (ex: `['i', '-S', 'xtend']`)
 * _options_: `child_process.spawn()` options (ex: `{cwd: './coolproject/'}`)
 
+Example:
+```js
+  sh.exec('npm', ['install', '-D', 'budo'])
+    .then(() => { sh.success('budo installed!') })
+    .catch((err) => { sh.error('Error during budo installation.', err) })
+```
+
 _→  Return a promise that will be resolved or rejected depending on the output of the command._
 
 <br>
 
-#### `sh.silentExec (command, [...arguments], {...options})`
+#### `sh.silentExec(command, [...arguments], {...options})`
 
 Basically the same as `sh.exec` without the parent `stdio` inheritance.
 <br>
 Instead, ouput are passed in the catch / resolve method of the returned promise
-<br><br>
+<br>
+
+Example:
+```js
+  sh.silentExec('date')
+    .then((msg) => { sh.success(`Receive ${msg}`) })
+  // log 'Receive Mar  4 oct 2016 00:25:37 CEST'
+```
+
 _→  Return a promise that will be resolved or rejected depending on the output of the command._
 
 <br>
 
-#### `sh.question (question, testAnswer)`
+#### `sh.question(question, testAnswer)`
 
 Ask question to the user
 <br>
 * _question_: question as a string
-* _testAnswer_: function called after user has answered. You can test the user answer pass as 1st parameter, and return true or false to resolve or reject the promise
+* _testAnswer_: function called after user has answered. You can test the user answer passed as 1st parameter, and return true or false to resolve or reject the promise
 
 Example:
 ```js
   sh.question('Do you want some cheese ? (yes) ', checkYes)
-    .catch(() => { sh.error ('No cheese for you')})
-    .then(() => { sh.success ('Some cheese : 🧀🧀🧀')})
+    .then(() => { sh.success('Some cheese : 🧀🧀🧀')})
+    .catch((err) => { sh.error('No cheese for you')})
 
   function checkYes (answer) {
     return answer.match(/^y(es)?$/i)
@@ -95,7 +110,7 @@ _→  Return a promise that will be resolved or rejected depending on the return
 
 <br>
 
-#### `sh.error (...msg)`
+#### `sh.error(...msg)`
 
 Console.log messages / errors in red
 <br>
@@ -103,7 +118,7 @@ _→  Return the kool-shell object, you can chain another method._
 
 <br>
 
-#### `sh.warning (...msg)`
+#### `sh.warning(...msg)`
 
 Console.log messages / errors in yellow
 <br>
@@ -111,7 +126,7 @@ _→  Return the kool-shell object, you can chain another method._
 
 <br>
 
-#### `sh.success (...msg)`
+#### `sh.success(...msg)`
 
 Console.log messages / errors in green
 <br>
@@ -119,7 +134,7 @@ _→  Return the kool-shell object, you can chain another method._
 
 <br>
 
-#### `sh.info (...msg)`
+#### `sh.info(...msg)`
 
 Console.log messages / errors in gray
 <br>
@@ -127,7 +142,7 @@ _→  Return the kool-shell object, you can chain another method._
 
 <br>
 
-#### `sh.exit (code = 0)`
+#### `sh.exit(code = 0)`
 
 Exit the node process with code _code_ (default: 0)
 

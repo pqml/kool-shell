@@ -1,10 +1,10 @@
 {
   "name": "kool-shell",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A minimal module to deal with shell commands",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
