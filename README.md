@@ -14,7 +14,7 @@
 
 <br><br>
 
-### Features
+## Features
 
 - Minimal dependencies
 - Native promises from Nodejs
@@ -26,7 +26,7 @@
 
 <br>
 
-### Installation
+## Installation
 
 ```sh
 npm install pqml/kool-shell -S
@@ -35,7 +35,7 @@ npm install pqml/kool-shell -S
 
 <br>
 
-### Example
+## Example
 ```javascript
 const path = require('path')
 const sh = require('kool-shell')
@@ -49,7 +49,7 @@ sh.exec('npm', ['init'], { cwd: path.join(__dirname, 'myproject') })
 
 <br>
 
-### Usage
+## Usage
 
 #### `sh.exec (command, [...arguments], {...options})`
 
@@ -84,7 +84,7 @@ Example:
 ```js
   sh.question('Do you want some cheese ? (yes) ', checkYes)
     .catch(() => { sh.error ('No cheese for you')})
-    .then(() => { sh.success (':mouse:')})
+    .then(() => { sh.success ('Some cheese : 🧀 🧀 🧀')})
 
   function checkYes (answer) {
     return answer.match(/^y(es)?$/i)
@@ -133,5 +133,5 @@ Exit the node process with code _code_ (default: 0)
 
 <br>
 
-### License
+## License
 MIT.
