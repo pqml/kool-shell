@@ -2,6 +2,10 @@
 <h3 align="center">:headphones: A minimal module to deal with shell :microphone:</h3>
 
 <div align="center">
+  <!-- NPM Version -->
+  <a href="https://www.npmjs.com/package/kool-shell">
+    <img src="https://img.shields.io/npm/v/kool-shell.svg?style=flat-square" alt="NPM Version" />
+  </a>
   <!-- License -->
   <a href="https://raw.githubusercontent.com/pqml/kool-shell/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License" />
