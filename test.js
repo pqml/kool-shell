@@ -42,6 +42,11 @@ function testExec () {
   })
 }
 
+function testStep () {
+  console.log('\nTest step() function')
+  sh.step(1, 3, 'Step one').step(2, 3, 'Step two...', 'multiple args').step(3, 3, 'Ok !')
+}
+
 function testExit () {
   console.log('\nTest exit(0)')
   sh.exit(0)
@@ -52,5 +57,6 @@ testQuestion()
   .then(() => testSpreading())
   .then(() => testSilentExec())
   .then(() => testExec())
+  .then(() => testStep())
   .then(() => testExit())
   .catch(err => console.log(err))

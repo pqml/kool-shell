@@ -55,7 +55,7 @@ sh.exec('npm', ['init'], { cwd: path.join(__dirname, 'myproject') })
 
 ## Usage
 
-#### `sh.exec(command, [...arguments], {...options})`
+### `sh.exec(command, [...arguments], {...options})`
 
 Exec a _command_ through a shell instance. The parent `stdio` is inherited, meaning that all logs, errors and user inputs will be displayed in the controlling terminal.
 
@@ -70,11 +70,11 @@ Example:
     .catch((err) => { sh.error('Error during budo installation.', err) })
 ```
 
-_→  Return a promise that will be resolved or rejected depending on the output of the command._
+> _→  Return a promise that will be resolved or rejected depending on the output of the command._
 
 <br>
 
-#### `sh.silentExec(command, [...arguments], {...options})`
+### `sh.silentExec(command, [...arguments], {...options})`
 
 Basically the same as `sh.exec` without the parent `stdio` inheritance.
 <br>
@@ -88,11 +88,11 @@ Example:
   // log 'Receive Mar  4 oct 2016 00:25:37 CEST'
 ```
 
-_→  Return a promise that will be resolved or rejected depending on the output of the command._
+> _→  Return a promise that will be resolved or rejected depending on the output of the command._
 
 <br>
 
-#### `sh.question(question, testAnswer)`
+### `sh.question(question, testAnswer)`
 
 Ask question to the user
 <br>
@@ -110,43 +110,68 @@ Example:
   }
 ```
 
-_→  Return a promise that will be resolved or rejected depending on the return value of the testAnswer function._
+> _→  Return a promise that will be resolved or rejected depending on the return value of the testAnswer function._
 
 <br>
 
-#### `sh.error(...msg)`
+### `sh.colors[color](message)`
+
+Prepend and append _color_ open/close tags to your _message_<br>
+Available colors are : <br>
+```
+black, red, green, yellow, blue, magenta, cyan, white, gray
+bgBlack, bgRed, bgGreen, bgYellow, bgBlue, bgMagenta, bgCyan, bgWhite
+```
+
+<br>
+
+### `sh.step(step, totalSteps, ...msg)`
+
+Console.log a "step message" - this is useful for step by step scripts
+
+Example:
+```js
+  sh.step(1, 4, 'first step')
+  // display "[1/4] first step"
+```
+
+> _→  Return the kool-shell object, you can chain another method._
+
+<br>
+
+### `sh.error(...msg)`
 
 Console.log messages / errors in red
 <br>
-_→  Return the kool-shell object, you can chain another method._
+> _→  Return the kool-shell object, you can chain another method._
 
 <br>
 
-#### `sh.warning(...msg)`
+### `sh.warning(...msg)`
 
 Console.log messages / errors in yellow
 <br>
-_→  Return the kool-shell object, you can chain another method._
+> _→  Return the kool-shell object, you can chain another method._
 
 <br>
 
-#### `sh.success(...msg)`
+### `sh.success(...msg)`
 
 Console.log messages / errors in green
 <br>
-_→  Return the kool-shell object, you can chain another method._
+> _→  Return the kool-shell object, you can chain another method._
 
 <br>
 
-#### `sh.info(...msg)`
+### `sh.info(...msg)`
 
 Console.log messages / errors in gray
 <br>
-_→  Return the kool-shell object, you can chain another method._
+> _→  Return the kool-shell object, you can chain another method._
 
 <br>
 
-#### `sh.exit(code = 0)`
+### `sh.exit(code = 0)`
 
 Exit the node process with code _code_ (default: 0)
 
