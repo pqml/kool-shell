@@ -98,7 +98,7 @@ Example:
 Ask question to the user
 <br>
 * _question_: question as a string
-* _testAnswer_: function called after user has answered. You can test the user answer passed as 1st parameter, and return true or false to resolve or reject the promise
+* _testAnswer_: (optional) function called after user has answered. You can test the user answer passed as 1st parameter, and return true or false to resolve or reject the promise. Without this parameter, sh.question promise will always resolve.
 
 Example:
 ```js
@@ -117,8 +117,9 @@ Example:
 
 ### `sh.secretQuestion(question, testAnswer)`
 
-This is the same method as `sh.question`, with a hidden user answer. 
-All chars entered by the user will be replaced by `*`
+This is the same method as `sh.question`, with a hidden user answer. <br>
+All chars entered by the user will be replaced by `*`. <br>
+This is useful if you want to make password inputs. <br>
 
 
 > _→  Return a promise that will be resolved or rejected depending on the return value of the testAnswer function._

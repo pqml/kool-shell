@@ -8,8 +8,7 @@ function testQuestion () {
 
 function testSecretQuestion () {
   console.log('\nTest secretQuestion()')
-  return sh.secretQuestion('What\'s your password ? ',
-    (answer) => { console.log('Answer: ' + answer) })
+  return sh.secretQuestion('What\'s your password ? ')
 }
 
 function testFullError () {

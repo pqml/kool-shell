@@ -1,6 +1,6 @@
 const readline = require('readline')
 
-function question(query, cb, hidden = false) {
+function question(query, cb = () => {return true}, hidden = false) {
   return new Promise((resolve, reject) => {
     const rl = readline.createInterface({
       input: process.stdin,
