@@ -27,6 +27,7 @@
 - Chainable methods
 - Displays colorful errors (message & stack trace)
 - Ask questions
+- Ask questions with hidden user answers
 
 <br>
 
@@ -102,7 +103,7 @@ Ask question to the user
 Example:
 ```js
   sh.question('Do you want some cheese ? (yes) ', checkYes)
-    .then(() => { sh.success('Some cheese : 🧀🧀🧀')})
+    .then((answer) => { sh.success('Some cheese : 🧀🧀🧀')})
     .catch((err) => { sh.error('No cheese for you')})
 
   function checkYes (answer) {
@@ -114,8 +115,20 @@ Example:
 
 <br>
 
+### `sh.secretQuestion(question, testAnswer)`
+
+This is the same method as `sh.question`, with a hidden user answer. 
+All chars entered by the user will be replaced by `*`
+
+
+> _→  Return a promise that will be resolved or rejected depending on the return value of the testAnswer function._
+
+<br>
+
+
 ### `sh.colors[color](message)`
 
+This is basicaly a minimal `chalk` module
 Prepend and append _color_ open/close tags to your _message_<br>
 Available colors are : <br>
 ```
@@ -123,7 +136,8 @@ black, red, green, yellow, blue, magenta, cyan, white, gray
 bgBlack, bgRed, bgGreen, bgYellow, bgBlue, bgMagenta, bgCyan, bgWhite
 ```
 
-<br>
+> _→  sh.colors() do not console.log your message. It just puts a color on it.
+
 
 ### `sh.step(step, totalSteps, ...msg)`
 
@@ -166,6 +180,15 @@ Console.log messages / errors in green
 ### `sh.info(...msg)`
 
 Console.log messages / errors in gray
+<br>
+> _→  Return the kool-shell object, you can chain another method._
+
+<br>
+
+### `sh.log(...msg)`
+
+Alias of `console.log`, with the Kool-shell chaining. <br>
+Useful if you don't want to "break" your Kool-shell syntax.
 <br>
 > _→  Return the kool-shell object, you can chain another method._
 
