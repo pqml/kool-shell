@@ -1,23 +1,17 @@
 const colors = require('./colors')
+const createQuestion = require('./question')
 const spawn = require('child_process').spawn
-const readline = require('readline')
 
 const KoolShell = {
 
   colors,
 
   question (query, cb) {
-    return new Promise((resolve, reject) => {
-      const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-      })
-      rl.question(query, (answer) => {
-        rl.close()
-        if (cb(answer) === false) reject()
-        else resolve()
-      })
-    })
+    return createQuestion(query, cb, false)
+  },
+
+  secretQuestion (query, cb) {
+    return createQuestion(query, cb, true)
   },
 
   exec (cmd, args = [], options = {}) {
@@ -43,9 +37,15 @@ const KoolShell = {
   },
 
   step (step, total, ...msg) {
-    process.stdout.write(colors.open.gray)
-    process.stdout.write(`[${step | 0}/${total | 0}] `)
-    process.stdout.write(colors.close.gray)
+    process.stdout.write(
+      colors.close.gray +
+      `[${step | 0}/${total | 0}] ` +
+      colors.close.gray)
+    console.log(...msg)
+    return this
+  },
+
+  log (...msg) {
     console.log(...msg)
     return this
   },
