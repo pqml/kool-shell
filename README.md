@@ -20,7 +20,7 @@
 
 ## Features
 
-- Minimal dependencies
+- 1 dependency (support-color`)
 - Native promises from Nodejs
 - Shell commands with silent & inherited stdio
 - Ansi Colors + Auto-detects color support

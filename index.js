@@ -38,7 +38,7 @@ const KoolShell = {
 
   step (step, total, ...msg) {
     process.stdout.write(
-      colors.close.gray +
+      colors.open.gray +
       `[${step | 0}/${total | 0}] ` +
       colors.close.gray)
     console.log(...msg)
