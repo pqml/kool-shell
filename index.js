@@ -19,7 +19,7 @@ const KoolShell = {
       const child = spawn(cmd, args, Object.assign({stdio: 'inherit'}, options))
       child.on('error', reject)
       child.on('close', (code) => {
-        return (code === 0) ? resolve() : reject(new Error(code))
+        return (code === 0) ? resolve() : reject(code)
       })
     })
   },
@@ -32,7 +32,7 @@ const KoolShell = {
       child.stdout.on('data', (data) => { stdout += data.toString() })
       child.stderr.on('data', (data) => { stderr += data.toString() })
       child.on('error', () => reject(stderr))
-      child.on('close', code => (code === 0) ? resolve(stdout.trim()) : reject(new Error(code)))
+      child.on('close', code => (code === 0) ? resolve(stdout.trim()) : reject(stderr))
     })
   },
 
