@@ -1,8 +1,8 @@
 'use strict'
 
 const test = require('tape')
-const koolshell = require('../src/koolshell')
-const exit = require('../src/plugins/exit')
+const koolshell = require('..')
+const exit = require('../plugins/exit')
 
 test('koolshell', t => {
   t.test('should break when calling use() with a bad 1st argument', t => {
