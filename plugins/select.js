@@ -17,6 +17,16 @@ function selectPlugin (sh) {
     return new Promise((resolve, reject) => {
       label = label.toString()
       list = list || []
+      let simpleOutput = true
+      for (let i = 0; i < list.length; i++) {
+        const el = list[i]
+        if (typeof el !== 'string') {
+          simpleOutput = false
+        } else {
+          list[i] = { value: el, selected: false }
+        }
+      }
+
       opts = opts || {}
       opts = Object.assign({}, {
         instructions: (
@@ -25,6 +35,11 @@ function selectPlugin (sh) {
           )
         )
       }, opts)
+
+      const symbols = {}
+      symbols.checked = opts.checked || (opts.radio ? '●' : '✔︎')
+      symbols.unchecked = opts.unchecked || '◦'
+
       let currentEl = 1
 
       process.stdin.setRawMode(true)
@@ -33,78 +48,110 @@ function selectPlugin (sh) {
 
       process.stdout.write(label + '\n' + opts.instructions + '\n')
       allocateLines(list)
-      renderList(list, currentEl)
+      renderList(list, currentEl, symbols)
+
+      function dispose () {
+        process.stdin.removeListener('data', onInput)
+      }
 
       function onInput (chunk) {
         const char = chunk.toString('utf8')
         switch (char) {
           case '\u0003': // Ctrl + C
+            dispose()
             process.emit('SIGINT')
             break
           case '\u001a': // Ctrl + Z
+            dispose()
             process.exit('SIGTSTP')
             break
           case '\n':
           case '\r':
           case '\u0004': // Enter
+            dispose()
             process.stdin.pause()
             process.stdout.write('\n')
-            resolve(list)
+            submit(list, simpleOutput)
+              .then(resolve)
+              .catch(reject)
             break
           case '\u001b[A': // Up
             currentEl = currentEl > 1 ? currentEl - 1 : 1
-            renderList(list, currentEl)
+            renderList(list, currentEl, symbols)
             break
           case '\u001b[B': // Down
             currentEl = currentEl < list.length ? currentEl + 1 : list.length
-            renderList(list, currentEl)
+            renderList(list, currentEl, symbols)
             break
           case ' ': // Space
-            let el = list[currentEl - 1]
-            if (typeof el === 'string') {
-              list[currentEl - 1] = { value: el, selected: true }
-            } else {
-              el.selected = !el.selected
+            if (opts.radio) {
+              getSelected(list).forEach(el => { el.selected = !el.selected })
             }
-            renderList(list, currentEl)
+            let el = list[currentEl - 1]
+            el.selected = !el.selected
+            renderList(list, currentEl, symbols)
             break
           default:
             break
         }
       }
-      // todo
+    })
+  }
+
+  function submit (list, simpleOutput) {
+    return new Promise((resolve, reject) => {
+      let out = []
+      list.forEach(el => {
+        if (el.selected) out.push(simpleOutput ? el.value : el)
+      })
+      function next (index) {
+        const el = out[index]
+        if (!el) return resolve(out)
+        if (typeof el.onChosen !== 'function') next(index + 1)
+        else {
+          Promise.resolve()
+            .then(() => el.onChosen(el))
+            .then(() => next(index + 1))
+            .catch(reject)
+        }
+      }
+      next(0)
     })
   }
 
   function allocateLines (list) {
     let out = ''
-    for (let i = 0; i < list.length; i++) out += '\n'
+    list.forEach(v => { out += '\n' })
     process.stdout.write(out)
   }
 
-  function renderList (list, currentEl) {
+  function getSelected (list) {
+    let selected = []
+    list.forEach(el => { el.selected && selected.push(el) })
+    return selected
+  }
+
+  function renderList (list, currentEl, symbols) {
     cursor.prevLine(list.length)
     for (let i = 0; i < list.length; i++) {
       cursor.clearLine()
       const el = list[i]
-      const id = i + 1
-      const val = typeof el === 'string' ? el : el.value || ''
+      const val = el.value || ''
       const selected = !!el.selected
-      const current = currentEl === id
-      const out = formatElement(id, val, selected, current)
+      const current = currentEl === (i + 1)
+      const out = formatElement(val, selected, current, symbols)
       process.stdout.write(out)
       cursor.nextLine()
     }
   }
 
-  function formatElement (id, value, selected, current) {
+  function formatElement (value, selected, current, symb) {
     let out = ''
-    out += selected ? colors.openTag.blue : colors.openTag.gray
-    out += selected ? '✔︎  ' : '   '
-    out += id + '. '
-    out += value
+    out += ' '
+    out += selected ? colors.blue(symb.checked) : colors.gray(symb.unchecked)
+    out += ' '
+    out += selected ? colors.blue(value) : value
     out += current ? colors.gray('  ←') : ''
-    out += selected ? colors.closeTag.blue : colors.closeTag.gray
     return out
   }
 }

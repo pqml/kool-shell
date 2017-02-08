@@ -6,7 +6,7 @@ function cleanupPlugin (sh) {
   if (typeof sh.emit === 'function') {
     process.on('SIGINT', exitHandler.bind(null, { exit: 0 }))
     process.on('uncaughtException', exitHandler.bind(null, { exit: 1 }))
-    process.on('exit', () => { sh.emit('cleanup') })
+    process.on('exit', (code) => { sh.emit('cleanup', code) })
   }
 
   return api
