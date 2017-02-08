@@ -6,6 +6,20 @@
 
 <br>
 
+### Features
+
+* 1 dependency (support-color)
+* Native promises from Nodejs
+* Shell commands with silent & inherited stdio
+* Ansi Colors + Auto-detects color support
+* Log methods with 4 log levels
+* User input with hidden input option
+* List input with multiple or single choice
+* Create and add your own kool-shell plugins easily
+* Cool emojis!
+
+<br>
+
 ### Requirements
 * Node > 4
 * npm > 2
