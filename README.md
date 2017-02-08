@@ -107,7 +107,7 @@ __Your plugin need to return an object.__ When your plugin is used, the returned
 
 <br>
 
-#### To do
+### To do
 - Test all native plugins
 - "Steps" plugin
 - Progress bar plugin
