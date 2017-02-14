@@ -22,7 +22,7 @@ sh.info('Displaying an info', 'Another info')
 ### Plugin options
 * `level` _(String, default 'info')_: Set the minimum message level to be display in the console. `level` have to be `debug`, `info`, `warn`, or `error`
 * `quiet` _(Boolean, default false)_: If set to true, don't log anything to the console
-* `color` _(Boolean, default true)_: If set to false, disable full-color log messages
+* `color` _(Boolean, default false)_: If set to false, disable full-color log messages
 * `debugPrefix` _(String)_: Value added before a debug message
 * `infoPrefix` _(String)_: Value added before an info message
 * `warnPrefix` _(String)_: Value added before a warning message

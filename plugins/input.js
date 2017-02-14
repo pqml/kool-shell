@@ -1,6 +1,7 @@
 'use strict'
 
 const readline = require('readline')
+const colors = require('../utils/colors.js')
 
 function inputPlugin (sh) {
   const api = {
@@ -11,13 +12,14 @@ function inputPlugin (sh) {
 
   function input (label, opts) {
     return new Promise((resolve, reject) => {
-      label = label.toString() + ' '
       opts = opts || {}
-
+      const prefix = opts.prefix || colors.gray('[?] ')
       const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
       })
+
+      label = prefix + label.toString() + ' '
 
       function hideInput (char) {
         char = char + ''
@@ -41,9 +43,9 @@ function inputPlugin (sh) {
       rl.question(label, (answer) => {
         if (opts.hidden) process.stdin.removeListener('data', hideInput)
         rl.close()
-        if (typeof opts.onAnswer === 'function') {
+        if (typeof opts.onSubmit === 'function') {
           Promise.resolve()
-            .then(() => opts.onAnswer(answer))
+            .then(() => opts.onSubmit(answer))
             .then(res => resolve(res))
             .catch(err => reject(err))
         } else {

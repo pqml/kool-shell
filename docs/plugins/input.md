@@ -16,7 +16,7 @@ function yesNoQuestion(answer) {
 }
 
 sh.input('Do you like omelette du fromage? (Yes)', { 
-    onAnswer: yesNoQuestion 
+    onSubmit: yesNoQuestion 
   })
   .then(omeletteLover => {
     if (omeletteLover) console.log('Nice. I like it too.')
@@ -33,4 +33,4 @@ Return a promise that will be resolved with the answer, when the user has answer
 * `label` _(String)_: A statement or query to write to the console, prepended to the prompt.
 * `options` _(Object)_
     - `hidden` _(Boolean, default false)_: Hide the user input with the `*` char. This is useful for sensible data like passwords.
-    - `onAnswer`: _(Function)_: A function that will be called when the user has answered. You can return a simple value or a promise if you want to do asynchronous actions. The input will resolve with the return value from the onAnswer function. If you reject your onAnswer promise, `sh.input` will be rejected as well. The `onAnswer` option can be useful to avoid too much nested promises or to process the user answer before resolving `sh.input`.
+    - `onSubmit`: _(Function)_: A function that will be called when the user has answered. You can return a simple value or a promise if you want to do asynchronous actions. The input will resolve with the return value from the onSubmit function. If you reject your onSubmit promise, `sh.input` will be rejected as well. The `onSubmit` option can be useful to avoid too much nested promises or to process the user answer before resolving `sh.input`.

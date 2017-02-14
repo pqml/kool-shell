@@ -15,7 +15,8 @@ function selectPlugin (sh) {
 
   function select (label, list, opts) {
     return new Promise((resolve, reject) => {
-      label = label.toString()
+      const prefix = opts.prefix || colors.gray('[?] ')
+      label = prefix + label.toString()
       list = list || []
       let simpleOutput = true
       for (let i = 0; i < list.length; i++) {
@@ -31,7 +32,7 @@ function selectPlugin (sh) {
       opts = Object.assign({}, {
         instructions: (
           colors.gray(
-            '(Press space to select, enter to valid.) \n'
+            '\n (Press space to select, enter to valid.)'
           )
         )
       }, opts)
@@ -71,7 +72,7 @@ function selectPlugin (sh) {
             dispose()
             process.stdin.pause()
             process.stdout.write('\n')
-            submit(list, simpleOutput)
+            submit(list, simpleOutput, opts.onSubmit)
               .then(resolve)
               .catch(reject)
             break
@@ -98,7 +99,7 @@ function selectPlugin (sh) {
     })
   }
 
-  function submit (list, simpleOutput) {
+  function submit (list, simpleOutput, onSubmit) {
     return new Promise((resolve, reject) => {
       let out = []
       list.forEach(el => {
@@ -106,13 +107,22 @@ function selectPlugin (sh) {
       })
       function next (index) {
         const el = out[index]
-        if (!el) return resolve(out)
-        if (typeof el.onChosen !== 'function') next(index + 1)
-        else {
-          Promise.resolve()
-            .then(() => el.onChosen(el))
-            .then(() => next(index + 1))
-            .catch(reject)
+        if (!el) {
+          return Promise.resolve()
+          .then(() => {
+            if (typeof onSubmit !== 'function') return out
+            return onSubmit(out)
+          })
+          .then(res => { resolve(res) })
+          .catch(reject)
+        } else {
+          if (typeof el.onChosen !== 'function') next(index + 1)
+          else {
+            Promise.resolve()
+              .then(() => el.onChosen(el))
+              .then(() => next(index + 1))
+              .catch(reject)
+          }
         }
       }
       next(0)
