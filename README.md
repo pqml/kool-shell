@@ -5,6 +5,10 @@
 
 <br>
 
+![Preview](https://github.com/pqml/kool-shell/raw/master/assets/preview.gif)
+
+<br>
+
 ### Features
 
 * 1 dependency (support-color)
