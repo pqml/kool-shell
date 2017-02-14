@@ -9,7 +9,7 @@
 
 <br>
 
-### Features
+## Features
 
 * 1 dependency (support-color)
 * Native promises from Nodejs
@@ -23,14 +23,14 @@
 
 <br>
 
-### Requirements
+## Requirements
 * Node > 4
 * npm > 2
 * ANSI/VT100 compatible terminal
 
 <br>
 
-### Installation
+## Installation
 
 ```sh
 npm install --save kool-shell
@@ -38,7 +38,7 @@ npm install --save kool-shell
 
 <br>
 
-### Usage
+## Usage
 
 kool-shell does nothing by itself; you need to add plugins to it. I did this to make kool-shell easy to test and improve, and for possible project-specific features.
 
@@ -58,7 +58,7 @@ sh.use(koolLog, { colors: false })
 
 <br>
 
-### Plugins Usage
+## Plugins Usage
 
 #### Native plugins documentation
 
@@ -111,12 +111,12 @@ __Your plugin need to return an object.__ When your plugin is used, the returned
 
 <br>
 
-### To do
+## To do
 - Test all native plugins
 - "Steps" plugin
 - Progress bar plugin
 
 <br>
 
-### License
+## License
 MIT.
