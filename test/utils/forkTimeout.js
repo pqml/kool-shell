@@ -1,3 +1,5 @@
+'use strict'
+
 const cp = require('child_process')
 
 function forkTimeout (t, filepath, opts) {

@@ -1,3 +1,5 @@
+'use strict'
+
 const koolshell = require('../..')
 const cleanup = require('../../plugins/cleanup')
 

@@ -1,3 +1,5 @@
+'use strict'
+
 const koolshell = require('../..')
 const exit = require('../../plugins/exit')
 
