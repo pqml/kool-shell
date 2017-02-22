@@ -15,9 +15,19 @@ function selectPlugin (sh) {
 
   function select (label, list, opts) {
     return new Promise((resolve, reject) => {
+      opts = opts || {}
+      opts = Object.assign({}, {
+        instructions: (
+          colors.gray(
+            '\n (Press space to select, enter to valid.)'
+          )
+        )
+      }, opts)
+
       const prefix = opts.prefix || colors.gray('[?] ')
       label = prefix + label.toString()
       list = list || []
+
       let simpleOutput = true
       for (let i = 0; i < list.length; i++) {
         const el = list[i]
@@ -27,15 +37,6 @@ function selectPlugin (sh) {
           list[i] = { value: el, selected: false }
         }
       }
-
-      opts = opts || {}
-      opts = Object.assign({}, {
-        instructions: (
-          colors.gray(
-            '\n (Press space to select, enter to valid.)'
-          )
-        )
-      }, opts)
 
       const symbols = {}
       symbols.checked = opts.checked || (opts.radio ? '●' : '✔︎')

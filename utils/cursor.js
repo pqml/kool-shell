@@ -1,6 +1,6 @@
 'use strict'
 
-function def (n) { return (n | 0) }
+function def (n) { return (typeof n !== 'number') ? 1 : n }
 
 const ESC = '\u001b'
 const s = process.stdout
