@@ -18,6 +18,9 @@
 * Log methods with 4 log levels
 * User input with hidden input option
 * List input with multiple or single choice
+* Progressbar
+* Step-by-step logging
+* Todo manager to use with progressbar or step plugin
 * Create and add your own kool-shell plugins easily
 * Cool emojis!
 
@@ -68,6 +71,9 @@ sh.use(koolLog, { colors: false })
 * [kool-shell/plugins/log](docs/plugins/log.md) - _Log functions_
 * [kool-shell/plugins/cleanup](docs/plugins/cleanup.md) - _Do some actions before exiting your app_
 * [kool-shell/plugins/exit](docs/plugins/exit.md) - _Simple alias of `process.exit(code)`_
+* [kool-shell/plugins/todo](docs/plugins/todo.md) - _Todo-list manager_
+* [kool-shell/plugins/step](docs/plugins/step.md) - _Display step-by-step messages_
+* [kool-shell/plugins/progressbar](docs/plugins/progressbar.md) - _Display a cool progressbar_
 
 <br>
 
@@ -103,7 +109,7 @@ Two arguments will be passed when your plugin is used trough `sh.use()`:
 * `sh` is the kool-shell instance used
 * `opts` is the options object passed trough `sh.use(plugin, options)`
 
-<br> 
+<br>
 
 __Your plugin need to return an object.__ When your plugin is used, the returned object will be merged into the api object of the kool-shell instance.
 
@@ -113,8 +119,6 @@ __Your plugin need to return an object.__ When your plugin is used, the returned
 
 ## To do
 - Test all native plugins
-- "Steps" plugin
-- Progress bar plugin
 
 <br>
 

@@ -6,7 +6,7 @@ function forkTimeout (t, filepath, opts) {
   opts = opts || {}
   const timeout = opts.timeout || 500
   const message = opts.message || 'process has timeout'
-  const child = cp.fork(filepath)
+  const child = cp.fork(filepath, [], opts)
 
   const timer = setTimeout(() => {
     if (opts.onTimeout) opts.onTimeout()

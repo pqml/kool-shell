@@ -9,6 +9,8 @@ const codes = {
   show () { return ESC + '[?25h' },
   hide () { return ESC + '[?25l' },
   clearLine () { return ESC + '[2K' },
+  column (n) { return ESC + '[' + (n | 0) + 'G' },
+  pos (r, c) { return ESC + '[' + (r | 0) + ';' + (c | 0) + 'H' },
   up (n) { return ESC + '[' + def(n) + 'A' },
   down (n) { return ESC + '[' + def(n) + 'B' },
   right (n) { return ESC + '[' + def(n) + 'C' },
@@ -26,6 +28,10 @@ const cursor = {
   },
   clearLine () {
     s.write(codes.clearLine())
+  },
+  pos (x, y) {
+    if (y === undefined) s.write(codes.column(x))
+    else s.write(codes.pos(y, x))
   },
   up (n) {
     s.write(codes.up(n))
