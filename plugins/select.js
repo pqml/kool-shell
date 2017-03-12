@@ -51,6 +51,7 @@ function selectPlugin (sh) {
 
       function dispose () {
         process.stdin.removeListener('data', onInput)
+        process.stdin.pause()
       }
 
       function onInput (chunk) {
@@ -68,7 +69,6 @@ function selectPlugin (sh) {
           case '\r':
           case '\u0004': // Enter
             dispose()
-            process.stdin.pause()
             process.stdout.write('\n')
             submit(list, simpleOutput, opts.onSubmit)
               .then(resolve)
