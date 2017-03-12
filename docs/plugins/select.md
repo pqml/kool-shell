@@ -14,7 +14,7 @@ const sh = koolShell().use(koolSelect)
 
 sh.select('What do you want for dinner ?', [
     'A double cheese',
-    { 'An omelette du fromage', selected: true }
+    { value: 'An omelette du fromage', selected: true }
     'Some vegetables'
   ])
   .then(result => {
