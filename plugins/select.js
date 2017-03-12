@@ -41,7 +41,6 @@ function selectPlugin (sh) {
 
       let currentEl = 1
 
-      console.log('isTty', process.stdin.isTTY)
       process.stdin.setRawMode(true)
       process.stdin.resume()
       process.stdin.on('data', onInput)
