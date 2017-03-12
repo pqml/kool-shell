@@ -4,15 +4,27 @@ const spawn = require('child_process').spawn
 
 function execPlugin (sh) {
   const api = {
-    exec
+    exec,
+    silentExec
   }
 
   return api
 
+  function silentExec (cmd, args, opts) {
+    return exec(cmd, args, Object.assign({
+      inherit: false,
+      silent: true,
+      trim: true
+    }, opts))
+  }
+
   function exec (cmd, args, opts) {
     return new Promise((resolve, reject) => {
       args = args || []
-      opts = opts || {}
+      opts = Object.assign({
+        inherit: false,
+        silent: false
+      }, opts)
 
       let out = {}
 
@@ -46,10 +58,12 @@ function execPlugin (sh) {
       }
 
       child.on('error', (code, signal) => {
+        trim()
         reject(Object.assign({ code, signal }, out))
       })
 
       child.on('close', (code, signal) => {
+        trim()
         if (!opts.silent && !opts.inherit) {
           removeEvents()
         }
@@ -75,6 +89,12 @@ function execPlugin (sh) {
       }
 
       function killChild () { child.kill('SIGINT') }
+
+      function trim () {
+        if (!opts.trim) return
+        out.stdout = out.stdout.trim()
+        out.stderr = out.stderr.trim()
+      }
     })
   }
 }

@@ -7,7 +7,7 @@ function logPlugin (sh, opts) {
   opts = Object.assign({}, {
     level: 'info',
     quiet: false,
-    color: true,
+    color: false,
     debugPrefix: colors.gray('Debug: '),
     infoPrefix: '',
     warnPrefix: colors.yellow('⚠️  Warning: '),
@@ -27,7 +27,8 @@ function logPlugin (sh, opts) {
     log: info,
     warn,
     error,
-    success
+    success,
+    step
   }
 
   return api
@@ -55,6 +56,13 @@ function logPlugin (sh, opts) {
   function success () {
     if (opts.level > 3) return api
     return write(opts.successPrefix, arguments, 'green')
+  }
+
+  function step (current, total, message) {
+    current = current | 0
+    total = total | 0
+    message = message.toString()
+    console.log(colors.gray('[' + current + '/' + total + '] ') + message)
   }
 
   function write (prefix, args, color) {

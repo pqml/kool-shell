@@ -53,7 +53,7 @@ Return a new progressBar instance
 
 * `progressBar.resume()`
     - Start rendering the bar
-    - Do not write in process.stdout when the bar is rendering, it will cause  visual glitches.
+    - Do not write in process.stdout when the bar is rendering, it will cause visual glitches.
 
 * `progressBar.pause()`
     - Stop rendering the bar

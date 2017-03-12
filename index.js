@@ -2,9 +2,7 @@
 
 const Emitter = require('events')
 
-function koolShell (opts) {
-  opts = Object.assign({}, opts || {})
-
+function koolShell () {
   let pluginCache = []
 
   let api = new Emitter()
@@ -19,7 +17,7 @@ function koolShell (opts) {
 
     if (~pluginCache.indexOf(plugin)) return
     pluginCache.push(plugin)
-    pluginOpts = Object.assign({}, opts, pluginOpts || {})
+    pluginOpts = Object.assign({}, pluginOpts || {})
     Object.assign(api, plugin(api, pluginOpts))
     return api
   }

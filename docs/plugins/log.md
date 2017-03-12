@@ -71,3 +71,5 @@ Write a success message to process.stdout. <br>
 If the plugin options `color` is set to true, the messages will be in green. <br>
 Return the kool shell api.
 
+#### `sh.step(currentStep, total, message)`
+Log `[ currentStep / total ] message`.
