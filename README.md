@@ -70,6 +70,7 @@ sh.use(koolLog, { colors: false })
 * [kool-shell/plugins/cleanup](docs/plugins/cleanup.md) - _Do some actions before exiting your app_
 * [kool-shell/plugins/exit](docs/plugins/exit.md) - _Simple alias of `process.exit(code)`_
 * [kool-shell/plugins/progressbar](docs/plugins/progressbar.md) - _Display a cool progressbar_
+* [kool-shell/plugins/spinner](docs/plugins/spinner.md) - _Display a cool spinner_
 
 <br>
 
