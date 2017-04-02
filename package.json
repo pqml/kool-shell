@@ -1,6 +1,6 @@
 {
   "name": "kool-shell",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "A minimal module to deal with the shell",
   "main": "index.js",
   "scripts": {
