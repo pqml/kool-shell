@@ -1,5 +1,7 @@
 # Spinner plugin
 
+![Spinner](https://cloud.githubusercontent.com/assets/2837959/24589402/ecdd7626-17d9-11e7-92f3-4b993be13f78.gif)
+
 ### Features
   * Spin the clock while logging stuff
   * Easily customizable (title, framerate, animation...)
@@ -32,16 +34,12 @@ spinner.pause(true)
 #### `const spinner = sh.spinner([opts])`
 Return a new spinner instance
 
-* `progressBar.set(progress)`
-    - Set the progress, from 0 (empty) to 1 (filled)
-    - You can set a value without calling `resume()`. The bar will update its progress without being displayed in the terminal.
-
-* `progressBar.resume()`
+* `spinner.resume()`
     - Start spinning
 
-* `progressBar.log(message)`
+* `spinner.log(message)`
     - Log a message in `%s`
 
-* `progressBar.pause(clear = false)`
+* `spinner.pause(clear = false)`
     - Stop spinning
     - if `clear` is true, clean the screen

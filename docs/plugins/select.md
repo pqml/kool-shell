@@ -1,5 +1,7 @@
 # Select plugin
 
+![Preview](https://github.com/pqml/kool-shell/raw/master/assets/preview.gif)
+
 ### Features
   * Ask the user to select items from a list
   * `radio` option to allow only one selected item

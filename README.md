@@ -5,7 +5,8 @@
 
 <br>
 
-![Preview](https://github.com/pqml/kool-shell/raw/master/assets/preview.gif)
+![Spinner](https://cloud.githubusercontent.com/assets/2837959/24589402/ecdd7626-17d9-11e7-92f3-4b993be13f78.gif)
+
 
 <br>
 
@@ -18,6 +19,7 @@
 * Log methods with 4 log levels
 * User input with hidden input option
 * List input with multiple or single choice
+* Awesome emoji-based spinner
 * Progressbar
 * Create and add your own kool-shell plugins easily
 * Cool emojis!
