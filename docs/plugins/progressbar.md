@@ -47,6 +47,9 @@ Return a new progressBar instance
 
 #### Methods
 
+#### `const progressBar = sh.progressBar([opts])`
+Return a new progressBar instance
+
 * `progressBar.set(progress)`
     - Set the progress, from 0 (empty) to 1 (filled)
     - You can set a value without calling `resume()`. The bar will update its progress without being displayed in the terminal.
