@@ -12,7 +12,7 @@ const koolInput = require('kool-shell/plugins/input')
 const sh = koolShell().use(koolInput)
 
 function yesNoQuestion(answer) {
-  return answer === '' || answer.match(^y(es)?$/i)
+  return answer === '' || answer.match(/^y(es)?$/i)
 }
 
 sh.input('Do you like omelette du fromage? (Yes)', { 
