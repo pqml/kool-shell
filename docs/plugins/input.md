@@ -7,7 +7,7 @@
 ### Example
 ```javascript
 const koolShell = require('kool-shell')
-const koolInput = require('kool-shell/plugins/exec')
+const koolInput = require('kool-shell/plugins/input')
 
 const sh = koolShell().use(koolInput)
 
