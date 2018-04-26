@@ -54,15 +54,15 @@ warn(colors.gray('Display a gray warning'))
 
 #### Namespacing
 It can be useful to not share kool-shell configuration and state when dealing with
-multiple modules. You can specify a namespace with `kool-shell/namespaced`.
+multiple modules. You can specify a namespace using the `kool-shell/namespaced` module.
 
 ```js
-const namespacedSh = require('kool-shell/namespaced')('MyModule')
-namespacedSh.setLogOptions(globalPrefix: '[MyModule] ')
-namespacedSh.log('Customized log for the MyModule namespace')
+const sh1 = require('kool-shell/namespaced')('MyModule')
+sh1.setLogOptions(globalPrefix: '[MyModule] ')
+sh1.log('Customized log for the MyModule namespace')
 
-const sh = require('kool-shell')
-sh.log('This log will not have the [MyModule] prefix')
+const sh2 = require('kool-shell')
+sh2.log('This log will not have the [MyModule] prefix')
 ```
 
 
@@ -119,7 +119,7 @@ Two arguments will be passed when your plugin is used through `sh.use()`:
 
 <br>
 
-__Your plugin need to return an object.__ When your plugin is used, the returned object will be merged into the api object of the kool-shell instance.
+__Your plugin need to be a function that return an object.__ When your plugin is used, the returned object will be merged into the api object of the kool-shell instance.
 
 > :warning:  Method/Property will be overiden if a new one has the same name. Namespace your plugin api if you use common method names
 
