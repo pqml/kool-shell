@@ -1,16 +1,17 @@
 const levels = ['debug', 'info', 'warn', 'error']
 
-function logPlugin (sh, opts) {
-  opts = Object.assign({}, {
+function logPlugin (sh) {
+  const opts = {
     level: 'info',
     quiet: false,
     color: false,
+    globalPrefix: '',
     debugPrefix: sh.colors.gray('Debug: '),
     infoPrefix: '',
     warnPrefix: sh.colors.yellow('⚠️  Warning: '),
     errorPrefix: sh.colors.red('💥  Error: '),
     successPrefix: sh.colors.green('✔︎  Success: ')
-  }, opts || {})
+  }
 
   if (opts.level === 'success') opts.level = 'error'
   opts.level = levels.indexOf(opts.level) !== -1
@@ -18,6 +19,7 @@ function logPlugin (sh, opts) {
     : 1
 
   const api = {
+    setLogOptions,
     debug,
     info,
     log: info,
@@ -28,6 +30,10 @@ function logPlugin (sh, opts) {
   }
 
   return api
+
+  function setLogOptions (newOpts = {}) {
+    Object.assign(opts, newOpts)
+  }
 
   function debug () {
     if (opts.level > 0) return api
@@ -63,6 +69,7 @@ function logPlugin (sh, opts) {
 
   function write (prefix, args, color) {
     if (opts.quiet) return api
+    process.stdout.write(opts.globalPrefix)
     process.stdout.write(prefix)
     if (opts.color && color) process.stdout.write(sh.colors.openTag[color])
     console.log.apply(undefined, args)

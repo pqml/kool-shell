@@ -52,6 +52,20 @@ const { warn, colors } = require('kool-shell')
 warn(colors.gray('Display a gray warning'))
 ```
 
+#### Namespacing
+It can be useful to not share kool-shell configuration and state when dealing with
+multiple modules. You can specify a namespace with `kool-shell/namespaced`.
+
+```js
+const namespacedSh = require('kool-shell/namespaced')('MyModule')
+namespacedSh.setLogOptions(globalPrefix: '[MyModule] ')
+namespacedSh.log('Customized log for the MyModule namespace')
+
+const sh = require('kool-shell')
+sh.log('This log will not have the [MyModule] prefix')
+```
+
+
 #### Kool-shell features
 
 All features are basically native plugins, always available in kool-shell. <br>
