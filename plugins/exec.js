@@ -1,5 +1,3 @@
-'use strict'
-
 const spawn = require('child_process').spawn
 
 function execPlugin (sh) {
@@ -68,10 +66,10 @@ function execPlugin (sh) {
           removeEvents()
         }
         if (
-        signal === 'SIGINT' ||
-        signal === 'SIGTERM' ||
-        signal === 'SIGHUP' ||
-        code !== 0
+          signal === 'SIGINT' ||
+          signal === 'SIGTERM' ||
+          signal === 'SIGHUP' ||
+          code !== 0
         ) {
           return reject(Object.assign({ code, signal }, out))
         }

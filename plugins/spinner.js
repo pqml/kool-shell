@@ -1,18 +1,16 @@
-'use strict'
-
 const cursor = require('../utils/cursor')
-
-const defOpts = {
-  delay: 100,
-  title: '%s',
-  frames: ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚', '🕛']
-}
 
 function allocateLines () {
   process.stdout.write('\n')
 }
 
 function spinnerPlugin (sh) {
+  const defaults = {
+    delay: 100,
+    title: '%s',
+    frames: ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚', '🕛']
+  }
+
   const api = {
     spinner: spinner
   }
@@ -20,7 +18,7 @@ function spinnerPlugin (sh) {
   return api
 
   function spinner (opts) {
-    opts = Object.assign({}, defOpts, opts || {})
+    opts = Object.assign({}, defaults, opts || {})
 
     let timer
     let ticks = 0

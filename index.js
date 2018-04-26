@@ -1,26 +1,28 @@
-'use strict'
-
 const Emitter = require('events')
+const pluginCache = []
+const sh = new Emitter()
 
-function koolShell () {
-  let pluginCache = []
-
-  let api = new Emitter()
-  api.use = use
-
-  return api
-
-  function use (plugin, pluginOpts) {
-    if (typeof plugin !== 'function') {
-      throw new Error('first argument of use() needs to be a function')
-    }
-
-    if (~pluginCache.indexOf(plugin)) return
-    pluginCache.push(plugin)
-    pluginOpts = Object.assign({}, pluginOpts || {})
-    Object.assign(api, plugin(api, pluginOpts))
-    return api
+sh.use = (plugin, pluginOpts) => {
+  if (typeof plugin !== 'function') {
+    throw new Error('first argument of use() needs to be a function')
   }
+
+  if (~pluginCache.indexOf(plugin)) return
+  pluginCache.push(plugin)
+  pluginOpts = Object.assign({}, pluginOpts || {})
+  Object.assign(sh, plugin(sh, pluginOpts))
+  return sh
 }
 
-module.exports = koolShell
+// Pre-install some plugins
+sh.use(require('./plugins/colors'))
+  .use(require('./plugins/log'))
+  .use(require('./plugins/select'))
+  .use(require('./plugins/spinner'))
+  .use(require('./plugins/cleanup'))
+  .use(require('./plugins/exec'))
+  .use(require('./plugins/exit'))
+  .use(require('./plugins/input'))
+  .use(require('./plugins/progressbar'))
+
+module.exports = sh

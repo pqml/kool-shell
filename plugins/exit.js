@@ -1,5 +1,3 @@
-'use strict'
-
 function exitPlugin (sh) {
   const api = {
     exit

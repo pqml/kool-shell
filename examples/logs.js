@@ -1,10 +1,4 @@
-'use strict'
-
-const koolShell = require('..')
-const koolLog = require('../plugins/log')
-
-const sh = koolShell()
-  .use(koolLog)
+const sh = require('..')
 
 sh.step(1, 3, 'Display error message')
 sh.error('Error!')

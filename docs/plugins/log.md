@@ -8,18 +8,18 @@
 
 ### Example
 ```javascript
-const koolShell = require('kool-shell')
-const koolLog = require('kool-shell/plugins/log')
-
-const sh = koolShell().use(koolLog, {
-  level: 'debug'
-})
+const sh = require('kool-shell')
 
 sh.info('Displaying an info', 'Another info')
   .success('It works! You can chain log messages')
 ```
 
-### Plugin options
+### Usage
+
+### `sh.setLogOptions(options)`
+Set options for the log plugin. <br>
+Available options:
+
 * `level` _(String, default 'info')_: Set the minimum message level to be display in the console. `level` have to be `debug`, `info`, `warn`, or `error`
 * `quiet` _(Boolean, default false)_: If set to true, don't log anything to the console
 * `color` _(Boolean, default false)_: If set to false, disable full-color log messages
@@ -28,24 +28,6 @@ sh.info('Displaying an info', 'Another info')
 * `warnPrefix` _(String)_: Value added before a warning message
 * `errorPrefix` _(String)_: Value added before an error message
 * `successPrefix` _(String)_: Value added before a success message
-
-### Usage
-
-#### `sh.colors[color](message)`
-This is basicaly a minimal `chalk` module. <br>
-Prepend and append _color_ open/close tags to your _message_ and return the string. <br>
-Available colors are : <br>
-```
-black, red, green, yellow, blue, magenta, cyan, white, gray
-bgBlack, bgRed, bgGreen, bgYellow, bgBlue, bgMagenta, bgCyan, bgWhite
-```
-
-
-#### `sh.colors.openTag[color]`
-Return the escape sequence for the _color_ open tag. <br>
-
-#### `sh.colors.closeTag[color]`
-Return the escape sequence for the _color_ close tag. <br>
 
 #### `sh.debug(...msg)`
 Write a debug message to process.stdout. <br>

@@ -1,12 +1,4 @@
-'use strict'
-
-const koolShell = require('..')
-const koolLog = require('../plugins/log')
-const koolSelect = require('../plugins/select')
-
-const sh = koolShell()
-  .use(koolLog)
-  .use(koolSelect)
+const sh = require('..')
 
 function choose () {
   return sh.select('Choose:', ['A', 'B', 'C'], {

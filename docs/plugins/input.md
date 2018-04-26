@@ -6,17 +6,14 @@
 
 ### Example
 ```javascript
-const koolShell = require('kool-shell')
-const koolInput = require('kool-shell/plugins/input')
-
-const sh = koolShell().use(koolInput)
+const sh = require('kool-shell')
 
 function yesNoQuestion(answer) {
   return answer === '' || answer.match(/^y(es)?$/i)
 }
 
-sh.input('Do you like omelette du fromage? (Yes)', { 
-    onSubmit: yesNoQuestion 
+sh.input('Do you like omelette du fromage? (Yes)', {
+    onSubmit: yesNoQuestion
   })
   .then(omeletteLover => {
     if (omeletteLover) console.log('Nice. I like it too.')

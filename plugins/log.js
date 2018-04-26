@@ -1,6 +1,3 @@
-'use strict'
-
-const colors = require('../utils/colors')
 const levels = ['debug', 'info', 'warn', 'error']
 
 function logPlugin (sh, opts) {
@@ -8,11 +5,11 @@ function logPlugin (sh, opts) {
     level: 'info',
     quiet: false,
     color: false,
-    debugPrefix: colors.gray('Debug: '),
+    debugPrefix: sh.colors.gray('Debug: '),
     infoPrefix: '',
-    warnPrefix: colors.yellow('⚠️  Warning: '),
-    errorPrefix: colors.red('💥  Error: '),
-    successPrefix: colors.green('✔︎  Success: ')
+    warnPrefix: sh.colors.yellow('⚠️  Warning: '),
+    errorPrefix: sh.colors.red('💥  Error: '),
+    successPrefix: sh.colors.green('✔︎  Success: ')
   }, opts || {})
 
   if (opts.level === 'success') opts.level = 'error'
@@ -21,7 +18,6 @@ function logPlugin (sh, opts) {
     : 1
 
   const api = {
-    colors,
     debug,
     info,
     log: info,
@@ -35,42 +31,42 @@ function logPlugin (sh, opts) {
 
   function debug () {
     if (opts.level > 0) return api
-    return write(opts.debugPrefix, arguments, 'gray')
+    return write(opts.debugPrefix, [].slice.call(arguments), 'gray')
   }
 
   function info () {
     if (opts.level > 1) return api
-    return write(opts.infoPrefix, arguments)
+    return write(opts.infoPrefix, [].slice.call(arguments))
   }
 
   function warn () {
     if (opts.level > 2) return api
-    return write(opts.warnPrefix, arguments, 'yellow')
+    return write(opts.warnPrefix, [].slice.call(arguments), 'yellow')
   }
 
   function error () {
     if (opts.level > 3) return api
-    return write(opts.errorPrefix, arguments, 'red')
+    return write(opts.errorPrefix, [].slice.call(arguments), 'red')
   }
 
   function success () {
     if (opts.level > 3) return api
-    return write(opts.successPrefix, arguments, 'green')
+    return write(opts.successPrefix, [].slice.call(arguments), 'green')
   }
 
   function step (current, total, message) {
     current = current | 0
     total = total | 0
     message = message.toString()
-    console.log(colors.gray('[' + current + '/' + total + '] ') + message)
+    console.log(sh.colors.gray('[' + current + '/' + total + '] ') + message)
   }
 
   function write (prefix, args, color) {
     if (opts.quiet) return api
     process.stdout.write(prefix)
-    if (opts.color && color) process.stdout.write(colors.openTag[color])
-    console.log.apply(undefined, [].slice.call(args))
-    if (opts.color && color) process.stdout.write(colors.closeTag[color])
+    if (opts.color && color) process.stdout.write(sh.colors.openTag[color])
+    console.log.apply(undefined, args)
+    if (opts.color && color) process.stdout.write(sh.colors.closeTag[color])
     return api
   }
 }

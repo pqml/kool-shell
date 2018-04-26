@@ -1,5 +1,3 @@
-'use strict'
-
 function def (n) { return (typeof n !== 'number') ? 1 : n }
 
 const ESC = '\u001b'

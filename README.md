@@ -27,8 +27,8 @@
 <br>
 
 ## Requirements
-* Node > 4
-* npm > 2
+* Node > 8
+* npm > 5
 * ANSI/VT100 compatible terminal
 
 <br>
@@ -42,69 +42,64 @@ npm install --save kool-shell
 <br>
 
 ## Usage
-
-kool-shell does nothing by itself; you need to add plugins to it. I did this to make kool-shell easy to test and improve, and for possible project-specific features.
-
 #### Create a new kool-shell instance
 ```js
-const koolShell = require('kool-shell')
-const sh = koolShell()
+const sh = require('kool-shell')
+sh.warn(sh.colors.gray('Display a gray warning'))
+
+// You can also use object destructuring
+const { warn, colors } = require('kool-shell')
+warn(colors.gray('Display a gray warning'))
 ```
 
-#### Add a plugin with `sh.use(plugin, [options])`
+#### Kool-shell features
+
+All features are basically native plugins, always available in kool-shell. <br>
+See the Plugins section below to learn how to create & add your own plugins.
+
+* [Log](docs/plugins/log.md) - _Log functions_
+* [Colors](docs/plugins/colors.md) - _Add colors to your log messages_
+* [Progressbar](docs/plugins/progressbar.md) - _Display a progressbar_
+* [Spinner](docs/plugins/spinner.md) - _Display a spinner_
+* [Exec](docs/plugins/exec.md) - _Execute a promised shell command_
+* [Input](docs/plugins/input.md) - _User prompt with hidden input option_
+* [Select](docs/plugins/select.md) - _Select/Radio input_
+* [Cleanup](docs/plugins/cleanup.md) - _Do some actions before exiting your app_
+* [Exit](docs/plugins/exit.md) - _Simple alias of `process.exit(code)`_
+
+<br>
+
+## Plugins
+
+#### Add a plugin
+
+Add a plugin with `sh.use(plugin, [options])`.
 You can specify options for your plugin.
 
 ```js
-const koolLog = require('kool-shell/plugins/log')
-sh.use(koolLog, { colors: false })
+const koolPlugin = require('kool-shell-plugin')
+sh.use(koolPlugin, { colors: false })
 ```
 
-<br>
+#### Create a plugin
 
-## Plugins Usage
-
-#### Native plugins documentation
-
-* [kool-shell/plugins/exec](docs/plugins/exec.md) - _Execute a promised shell command_
-* [kool-shell/plugins/input](docs/plugins/input.md) - _User prompt with hidden input option_
-* [kool-shell/plugins/select](docs/plugins/select.md) - _Select/Radio input_
-* [kool-shell/plugins/log](docs/plugins/log.md) - _Log functions_
-* [kool-shell/plugins/cleanup](docs/plugins/cleanup.md) - _Do some actions before exiting your app_
-* [kool-shell/plugins/exit](docs/plugins/exit.md) - _Simple alias of `process.exit(code)`_
-* [kool-shell/plugins/progressbar](docs/plugins/progressbar.md) - _Display a cool progressbar_
-* [kool-shell/plugins/spinner](docs/plugins/spinner.md) - _Display a cool spinner_
-
-<br>
-
-#### Where are the native plugins?
-
-Native plugins are in `kool-shell/plugins`. <br>
-Example for require one:
-```js
-const koolExec = require('kool-shell/plugins/exec')
-```
-
-<br>
-
-#### Create a kool-shell plugin
-
-###### Template
+###### Plugin template
 ```javascript
-module.exports = myPlugin (sh, opts) {
-  var api = {
-    sayHello
-  }
-
-  return api
-
-  function sayHello() {
-    console.log('hello.')
+module.exports = myPlugin (sh, opts = {}) {
+  return {
+    sayHello () {
+      // kool-shell native features are always available from the sh object.
+      // for instance, you can easily use colors using sh.colors method
+      opts.gray
+        ? console.log('hello.')
+        : console.log(sh.colors.gray('hello'))
+    }
   }
 }
 
 ```
 
-Two arguments will be passed when your plugin is used trough `sh.use()`:
+Two arguments will be passed when your plugin is used through `sh.use()`:
 * `sh` is the kool-shell instance used
 * `opts` is the options object passed trough `sh.use(plugin, options)`
 
@@ -117,7 +112,7 @@ __Your plugin need to return an object.__ When your plugin is used, the returned
 <br>
 
 ## To do
-- Test all native plugins
+- Test all native features
 
 <br>
 

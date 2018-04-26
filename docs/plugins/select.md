@@ -9,10 +9,7 @@
 
 ### Example
 ```javascript
-const koolShell = require('kool-shell')
-const koolSelect = require('kool-shell/plugins/select')
-
-const sh = koolShell().use(koolSelect)
+const sh = require('kool-shell')
 
 sh.select('What do you want for dinner ?', [
     'A double cheese',

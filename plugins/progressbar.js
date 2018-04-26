@@ -1,21 +1,18 @@
-'use strict'
-
-const colors = require('../utils/colors')
 const cursor = require('../utils/cursor')
-
-const defOpts = {
-  showPercents: true,
-  clearOnPause: true,
-  width: 20,
-  emptySymbol: colors.gray('░'),
-  fillSymbol: '▓'
-}
 
 function allocateLines () {
   process.stdout.write('\n')
 }
 
 function progressBarPlugin (sh) {
+  const defaults = {
+    showPercents: true,
+    clearOnPause: true,
+    width: 20,
+    emptySymbol: sh.colors.gray('░'),
+    fillSymbol: '▓'
+  }
+
   const api = {
     progressBar: progressBar
   }
@@ -23,7 +20,7 @@ function progressBarPlugin (sh) {
   return api
 
   function progressBar (opts) {
-    opts = Object.assign({}, defOpts, opts || {})
+    opts = Object.assign({}, defaults, opts || {})
     let progress = 0
     let resumed = false
 
@@ -60,11 +57,11 @@ function progressBarPlugin (sh) {
 
     function render (message) {
       if (!resumed) return
-      message = message ? ' - ' + colors.gray(message) : ''
+      message = message ? ' - ' + sh.colors.gray(message) : ''
       let bar = ''
       let filledChars = Math.floor(progress * opts.width)
       let percents = opts.showPercents
-        ? colors.gray(' ' + Math.floor(progress * 100) + '%')
+        ? sh.colors.gray(' ' + Math.floor(progress * 100) + '%')
         : ''
       for (let i = 0; i < opts.width; i++) {
         bar += (i <= filledChars)

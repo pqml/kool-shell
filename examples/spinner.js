@@ -1,12 +1,4 @@
-'use strict'
-
-const koolShell = require('..')
-const koolSpinner = require('../plugins/spinner')
-const koolLog = require('../plugins/log')
-
-const sh = koolShell()
-  .use(koolLog)
-  .use(koolSpinner)
+const sh = require('..')
 
 const TICK_DELAY = 500
 const spinner = sh.spinner({

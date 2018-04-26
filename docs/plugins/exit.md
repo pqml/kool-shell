@@ -5,10 +5,7 @@
 
 ### Example
 ```javascript
-const koolShell = require('kool-shell')
-const koolExit = require('kool-shell/plugins/exit')
-
-const sh = koolShell().use(koolExit)
+const sh = require('kool-shell')
 
 // Exit the app with an error code
 sh.exit(1)

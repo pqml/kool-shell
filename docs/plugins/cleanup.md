@@ -7,10 +7,7 @@
 
 ### Example
 ```javascript
-const koolShell = require('kool-shell')
-const koolCleanup = require('kool-shell/plugins/cleanup')
-
-const sh = koolShels().use(koolCleanup)
+const sh = require('kool-shell')
 
 function cleanupAction(code) {
   if (code === 0) console.log('App is exiting without an error, cool!')
@@ -21,8 +18,6 @@ sh.on('cleanup', cleanupAction)
 
 // Remove cleanupAction from the functions to call when exiting
 sh.removeListener('cleanup', cleanupAction)
-
-
 ```
 
 ### Usage

@@ -1,12 +1,4 @@
-'use strict'
-
-const koolShell = require('..')
-const koolBar = require('../plugins/progressbar')
-const koolLog = require('../plugins/log')
-
-const sh = koolShell()
-  .use(koolLog)
-  .use(koolBar)
+const sh = require('..')
 
 const UPDATE_SPEED = 200
 const pb = sh.progressBar({

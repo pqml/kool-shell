@@ -7,10 +7,7 @@
 
 ### Example
 ```javascript
-const koolShell = require('kool-shell')
-const koolExec = require('kool-shell/plugins/exec')
-
-const sh = koolShell().use(koolExec)
+const sh = require('kool-shell')
 
 // Execute the `npm init` command
 sh.exec('npm', ['init'])

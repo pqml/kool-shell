@@ -1,6 +1,6 @@
 {
   "name": "kool-shell",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "A minimal module to deal with the shell",
   "main": "index.js",
   "scripts": {
@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/pqml/kool-shell#readme",
   "dependencies": {
-    "supports-color": "^3.1.2"
+    "supports-color": "^5.4.0"
   },
   "devDependencies": {
-    "standard": "^8.6.0",
+    "standard": "^11.0.1",
     "tap-spec": "^4.1.1",
-    "tape": "^4.6.3"
+    "tape": "^4.9.0"
   }
 }

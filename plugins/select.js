@@ -1,6 +1,3 @@
-'use strict'
-
-const colors = require('../utils/colors')
 const cursor = require('../utils/cursor')
 
 function selectPlugin (sh) {
@@ -15,13 +12,13 @@ function selectPlugin (sh) {
       opts = opts || {}
       opts = Object.assign({}, {
         instructions: (
-          colors.gray(
+          sh.colors.gray(
             '\n (Press space to select, enter to valid.)'
           )
         )
       }, opts)
 
-      const prefix = opts.prefix || colors.gray('[?] ')
+      const prefix = opts.prefix || sh.colors.gray('[?] ')
       label = prefix + label.toString()
       list = list || []
 
@@ -64,7 +61,7 @@ function selectPlugin (sh) {
           case '\u001a': // Ctrl + Z
             dispose()
             process.exit('SIGTSTP')
-            break
+            break // eslint-disable-line
           case '\n':
           case '\r':
           case '\u0004': // Enter
@@ -107,12 +104,12 @@ function selectPlugin (sh) {
         const el = out[index]
         if (!el) {
           return Promise.resolve()
-          .then(() => {
-            if (typeof onSubmit !== 'function') return out
-            return onSubmit(out)
-          })
-          .then(res => { resolve(res) })
-          .catch(reject)
+            .then(() => {
+              if (typeof onSubmit !== 'function') return out
+              return onSubmit(out)
+            })
+            .then(res => { resolve(res) })
+            .catch(reject)
         } else {
           if (typeof el.onChosen !== 'function') next(index + 1)
           else {
@@ -156,10 +153,10 @@ function selectPlugin (sh) {
   function formatElement (value, selected, current, symb) {
     let out = ''
     out += ' '
-    out += selected ? colors.blue(symb.checked) : colors.gray(symb.unchecked)
+    out += selected ? sh.colors.blue(symb.checked) : sh.colors.gray(symb.unchecked)
     out += ' '
-    out += selected ? colors.blue(value) : value
-    out += current ? colors.gray('  ←') : ''
+    out += selected ? sh.colors.blue(value) : value
+    out += current ? sh.colors.gray('  ←') : ''
     return out
   }
 }

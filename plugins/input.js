@@ -1,7 +1,4 @@
-'use strict'
-
 const readline = require('readline')
-const colors = require('../utils/colors.js')
 
 function inputPlugin (sh) {
   const api = {
@@ -13,7 +10,7 @@ function inputPlugin (sh) {
   function input (label, opts) {
     return new Promise((resolve, reject) => {
       opts = opts || {}
-      const prefix = opts.prefix || colors.gray('[?] ')
+      const prefix = opts.prefix || sh.colors.gray('[?] ')
       const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
