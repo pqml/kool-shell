@@ -1,18 +1,31 @@
+let error = null
+let handled = false
+let log = true
+
+function caughtExits (nlog = true) {
+  if (handled) return
+  process.on('SIGINT', res => exitHandler({ res, exit: 0 }))
+  process.on('uncaughtException', res => exitHandler({ res, exit: 1 }))
+  handled = true
+  log = nlog
+}
+
+function exitHandler ({ res, exit }) {
+  if (exit === 1) {
+    error = res
+    if (log) console.log(error)
+  }
+  if (exit !== undefined) process.exit(exit)
+}
+
 function cleanupPlugin (sh) {
-  const api = {}
+  const api = { caughtExits }
 
   if (typeof sh.emit === 'function') {
-    process.on('SIGINT', exitHandler.bind(null, { exit: 0 }))
-    process.on('uncaughtException', exitHandler.bind(null, { exit: 1 }))
-    process.on('exit', (code) => { sh.emit('cleanup', code) })
+    process.on('exit', code => { sh.emit('cleanup', { code, error }) })
   }
 
   return api
-
-  function exitHandler (exitOpts) {
-    exitOpts = exitOpts || {}
-    if (exitOpts.exit !== undefined) process.exit(exitOpts.exit)
-  }
 }
 
 module.exports = cleanupPlugin

@@ -22,6 +22,12 @@ sh.removeListener('cleanup', cleanupAction)
 
 ### Usage
 
-Just listen to the `cleanup` event with `sh.on('cleanup', callback)`.
+#### sh.caughtExits([log])
+This tells kool-shell to handle `SIGINT` and `uncaughtException` events.
+* `log` _(String, default true)_: Automatically log errors. If set to false, the errors will not be displayed.
+
+#### sh.on('cleanup', cleanupAction)
+Kool-shell emits `cleanup` when your script exits and will immediately call cleanupAction
+
 <br>
 [More infos about event emitters in Nodejs](https://nodejs.org/api/events.html)
