@@ -9,6 +9,9 @@
 ```javascript
 const sh = require('kool-shell')
 
+// Caught exit events and automatically logs errors
+sh.caughtExits(true)
+
 function cleanupAction(code) {
   if (code === 0) console.log('App is exiting without an error, cool!')
 }
